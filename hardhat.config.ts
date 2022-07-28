@@ -9,6 +9,7 @@ import "solidity-coverage";
 
 import "./tasks/accounts";
 import "./tasks/clean";
+import "./tasks/solveMinion";
 
 import { resolve } from "path";
 
