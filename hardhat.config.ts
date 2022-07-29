@@ -11,6 +11,7 @@ import "./tasks/accounts";
 import "./tasks/clean";
 import "./tasks/solveMinion";
 import "./tasks/solveUndead";
+import "./tasks/solveThirtyFive";
 
 import { resolve } from "path";
 
@@ -70,6 +71,9 @@ const config: HardhatUserConfig = {
                         runs: 1,
                     },
                 },
+            },
+            {
+                version: "0.7.4",
             },
             {
                 version: "0.4.25",
