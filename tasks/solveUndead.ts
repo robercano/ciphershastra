@@ -10,17 +10,29 @@ task("solveUndead", "Solves the Undead challenge")
             throw new Error(`Invalid contract address format: ${args.undeadAddress}`);
         }
 
+        /**
+         * YUL code that returns the string "UnDeAD" encoded as a bytes32 when any function
+         * is called on the contract. Used to achieve the 15 bytes size requirement. The bytecode
+         * for the YUL contract is the value of the `minimalUndeadCode` variable.
+         */
+        // object "YulContract" {
+        //     code {
+        //         datacopy(0, dataoffset("runtime"), datasize("runtime"))
+        //         return (0, datasize("runtime"))
+        //     }
+        //     object "runtime" {
+        //         code {
+        //             mstore(0,  0x556e44654144) // UnDeAD
+        //             return(0, 0x20)
+        //         }
+        //     }
+        // }
+        const minimalUndeadCode = "0x600f80600d600039806000f3fe65556e4465414460005260206000f3";
+
         const UndeadSolutionCreate2Factory = await hre.ethers.getContractFactory("UndeadSolutionFactory");
         const undeadSolutionCreate2Factory = (await UndeadSolutionCreate2Factory.deploy()) as UndeadSolutionFactory;
 
-        const UndeadSolutionFactory = await hre.ethers.getContractFactory("UndeadSolution");
-
-        const [salt, address] = findSaltToMatch(
-            hre,
-            undeadSolutionCreate2Factory.address,
-            UndeadSolutionFactory.bytecode,
-            "b100d",
-        );
+        const [salt, address] = findSaltToMatch(hre, undeadSolutionCreate2Factory.address, minimalUndeadCode, "b100d");
 
         if (!salt || !address) {
             throw new Error("Could not find a salt to match the address");
@@ -29,7 +41,7 @@ task("solveUndead", "Solves the Undead challenge")
         console.log(`Found salt: ${salt}`);
         console.log(`Found address: ${address}`);
 
-        await undeadSolutionCreate2Factory.deploy(salt);
+        await undeadSolutionCreate2Factory.deploy(minimalUndeadCode, salt);
 
         const undeadSolutionAddress = await undeadSolutionCreate2Factory.latestDeploy();
 
@@ -39,7 +51,9 @@ task("solveUndead", "Solves the Undead challenge")
         const undeadChallenge = (await UndeadChallengeFactory.attach(args.undeadAddress)) as Undead;
 
         console.log(`Attempting hack...`);
-        await undeadChallenge.deadOrAlive(undeadSolutionAddress);
+        const tx = await undeadChallenge.deadOrAlive(undeadSolutionAddress);
+
+        await tx.wait();
 
         const id = hre.ethers.utils.solidityKeccak256(["address"], [undeadSolutionAddress]);
         console.log(`Calculated address id: ${id}`);
