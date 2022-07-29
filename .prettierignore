@@ -10,7 +10,6 @@ dist/
 lib/
 node_modules/
 typechain/
-contracts/challenges/
 
 # files
 *.env

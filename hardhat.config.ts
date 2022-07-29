@@ -10,6 +10,7 @@ import "solidity-coverage";
 import "./tasks/accounts";
 import "./tasks/clean";
 import "./tasks/solveMinion";
+import "./tasks/solveUndead";
 
 import { resolve } from "path";
 
@@ -51,16 +52,32 @@ const config: HardhatUserConfig = {
         tests: "./test",
     },
     solidity: {
-        version: "0.8.9",
-        settings: {
-            metadata: {
-                bytecodeHash: "none",
+        compilers: [
+            {
+                version: "0.8.0",
+                settings: {
+                    optimizer: {
+                        enabled: true,
+                        runs: 1,
+                    },
+                },
             },
-            // Disable the optimizer when debugging
-            // https://hardhat.org/hardhat-network/#solidity-optimizer-support
-            optimizer: {
-                enabled: true,
-                runs: 200,
+            {
+                version: "0.8.9",
+                settings: {
+                    optimizer: {
+                        enabled: true,
+                        runs: 1,
+                    },
+                },
+            },
+            {
+                version: "0.4.25",
+            },
+        ],
+        overrides: {
+            "contracts/challenges/Shilpkaar.sol": {
+                version: "0.4.25",
             },
         },
     },
