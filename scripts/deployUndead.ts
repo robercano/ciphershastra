@@ -1,8 +1,5 @@
 import { ethers } from "hardhat";
 
-/**
- * Deploy SimpleContract
- */
 async function main() {
     const undeadFactory = await ethers.getContractFactory("undead");
     const undead = await undeadFactory.deploy(

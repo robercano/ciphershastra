@@ -15,3 +15,7 @@ Deploy the solution contract at the right time and do everything in the construc
 # ThirtyFive
 
 Solved by deployer: 0xc892cfd3e75Cf428BDD25576e9a42D515697B2C7
+
+# Maya
+
+Solved by deployer: 0xc892cfd3e75Cf428BDD25576e9a42D515697B2C7

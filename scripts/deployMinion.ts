@@ -1,8 +1,5 @@
 import { ethers } from "hardhat";
 
-/**
- * Deploy SimpleContract
- */
 async function main() {
     const minionFactory = await ethers.getContractFactory("Minion");
     const minion = await minionFactory.deploy();

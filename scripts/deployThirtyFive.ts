@@ -1,8 +1,5 @@
 import { ethers } from "hardhat";
 
-/**
- * Deploy SimpleContract
- */
 async function main() {
     const ThirtyFiveFactory = await ethers.getContractFactory("ThirtyFive");
     const thirtyFive = await ThirtyFiveFactory.deploy("ThirtyFive", "1337");
