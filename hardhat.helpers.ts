@@ -176,6 +176,7 @@ export function getLocalhostChainConfig(): NetworkUserConfig {
             initialIndex: 0,
             count: 10,
         },
+        chainId: ChainIds.hardhat,
     };
 }
 

@@ -11,3 +11,7 @@ Just make sure to dis-approve the approved amount after you stake the tokens
 # Minion
 
 Deploy the solution contract at the right time and do everything in the constructor
+
+# ThirtyFive
+
+Solved by deployer: 0xc892cfd3e75Cf428BDD25576e9a42D515697B2C7

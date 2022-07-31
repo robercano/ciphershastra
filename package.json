@@ -27,6 +27,7 @@
         "solve-undead:rinkeby": "yarn hardhat --network rinkeby solveUndead",
         "deploy-thirtyfive:local": "yarn hardhat --network localhost run ./scripts/deployThirtyFive.ts",
         "solve-thirtyfive:local": "yarn hardhat --network localhost solveThirtyFive",
+        "solve-thirtyfive:rinkeby": "yarn hardhat --network rinkeby solveThirtyFive",
         "lint": "yarn lint:sol && yarn lint:ts && yarn prettier:check",
         "lint:sol": "solhint --config ./.solhint.json --max-warnings 0 \"contracts/**/*.sol\"",
         "lint:ts": "eslint --config ./.eslintrc.yaml --ignore-path ./.eslintignore --ext .js,.ts .",

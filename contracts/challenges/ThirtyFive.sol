@@ -97,8 +97,6 @@ library ECDSA {
 
 // creator: @razzor_tweet
 
-import "hardhat/console.sol";
-
 pragma solidity ^0.7.0;
 
 contract ThirtyFive {
@@ -143,7 +141,6 @@ contract ThirtyFive {
         bytes32 digest = keccak256(abi.encodePacked("\x19\x01", DOMAIN_SEPARATOR, structHash));
         address signer = digest.recover(signature);
 
-        console.log("Signer: ", signer);
         require(signer == msg.sender, "Only Self Signed Signatures are allowed");
         bytes32 slot = keccak256(abi.encode(msg.sender, 0));
         assembly {
@@ -157,7 +154,6 @@ contract ThirtyFive {
             verificationTokens[msg.sender] = token;
             isTokenGenerated[msg.sender] = true;
 
-            console.logBytes32(token);
             emit TokenGen(msg.sender, token);
         }
     }
@@ -166,9 +162,6 @@ contract ThirtyFive {
         require(token != bytes32(0), "No Token Yet");
         require(token == verificationTokens[msg.sender], "Invalid Token");
         bytes32 id = keccak256(msg.data);
-
-        console.log("HERE!");
-        console.logBytes(msg.data);
 
         require(!identifiers[id], "Already executed");
         identifiers[id] = true;
