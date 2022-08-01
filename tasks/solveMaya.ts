@@ -3,7 +3,7 @@ import { HardhatRuntimeEnvironment, TaskArguments } from "hardhat/types";
 import { Maya, MERC20 } from "../typechain";
 
 task("solveMaya", "Solves the Maya challenge")
-    .addParam("mayaAddress", "Address of the ERC20 token contract", undefined, types.string, false)
+    .addParam("mayaAddress", "Address of the Maya contract", undefined, types.string, false)
     .setAction(async (args: TaskArguments, hre: HardhatRuntimeEnvironment) => {
         if (!hre.ethers.utils.isAddress(args.mayaAddress)) {
             throw new Error(`Invalid contract address format: ${args.mayaAddress}`);

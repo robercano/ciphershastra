@@ -13,6 +13,7 @@ import "./tasks/solveMinion";
 import "./tasks/solveUndead";
 import "./tasks/solveThirtyFive";
 import "./tasks/solveMaya";
+import "./tasks/solveSherlock";
 
 import { resolve } from "path";
 
