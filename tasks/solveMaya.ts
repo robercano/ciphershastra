@@ -13,7 +13,7 @@ task("solveMaya", "Solves the Maya challenge")
 
         // Use a different signer from the local deployer so we can test properly
         let signer;
-        if (hre.network.name === "hardhat") {
+        if (hre.network.name === "hardhat" || hre.network.name === "localhost") {
             signer = signers[1];
         } else {
             signer = signers[0];
@@ -25,7 +25,7 @@ task("solveMaya", "Solves the Maya challenge")
         const MERC20Factory = await hre.ethers.getContractFactory("MERC20", signer);
 
         console.log("Getting the token contract address...");
-        const merc20TokenAddress = "0x4fac961bb74148f06b8a53f1dd7860fc827fb905"; //await mayaChallenge.token();
+        const merc20TokenAddress = await mayaChallenge.token();
 
         console.log("Found MERC20 token at address:", merc20TokenAddress);
         const merc20Challenge = (await MERC20Factory.attach(merc20TokenAddress)) as MERC20;
@@ -44,6 +44,7 @@ task("solveMaya", "Solves the Maya challenge")
 
         console.log("Buying a Maya...");
         tx = await mayaChallenge.buy();
+
         await tx.wait();
 
         console.log("Buying a second Maya...");

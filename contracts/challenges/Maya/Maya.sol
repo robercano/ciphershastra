@@ -8,6 +8,8 @@ import "./SafeERC20.sol";
 import "./ERC721.sol";
 import "./Counters.sol";
 
+import "hardhat/console.sol";
+
 contract Maya is ERC721("MAYA", "MAYA") {
     using SafeERC20 for IERC20;
     using Counters for Counters.Counter;
@@ -37,6 +39,8 @@ contract Maya is ERC721("MAYA", "MAYA") {
         _tokenIdCounter.increment();
         _mint(msg.sender, tokenId);
         allIds[msg.sender].push(tokenId);
+
+        console.log("Gas left: ", gasleft());
         token.safeTransferFrom(msg.sender, address(this), price);
     }
 

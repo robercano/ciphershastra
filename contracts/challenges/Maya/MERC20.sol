@@ -1,8 +1,6 @@
 pragma solidity ^0.8.0;
 import "./ERC20.sol";
 
-import "hardhat/console.sol";
-
 interface IMaya {
     function balanceOf(address owner) external view returns (uint256);
 }
@@ -64,15 +62,10 @@ contract MERC20 is ERC20("MayaERC20Token", "MERC20") {
         address to,
         uint256 amount
     ) public override returns (bool) {
-        console.log("transferFrom has been called!");
         require(to == Maya, "Don't cheat the system!");
-        console.log("spendAllowance");
         address spender = msg.sender;
         _spendAllowance(from, spender, amount);
-        console.log("transfer");
         _transfer(from, to, amount);
-
-        console.log("after transfer");
         return true;
     }
 
