@@ -9,11 +9,12 @@ import "solidity-coverage";
 
 import "./tasks/accounts";
 import "./tasks/clean";
+import "./tasks/solveSherlock";
 import "./tasks/solveMinion";
 import "./tasks/solveUndead";
+import "./tasks/solveShilpkaar";
 import "./tasks/solveThirtyFive";
 import "./tasks/solveMaya";
-import "./tasks/solveSherlock";
 
 import { resolve } from "path";
 
