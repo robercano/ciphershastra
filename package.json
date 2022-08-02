@@ -25,6 +25,7 @@
         "solve-sherlock:rinkeby": "yarn hardhat --network rinkeby solveSherlock",
         "deploy-minion:local": "yarn hardhat --network localhost run ./scripts/deployMinion.ts",
         "solve-minion:local": "yarn hardhat --network localhost solveMinion",
+        "solve-minion:rinkeby": "yarn hardhat --network rinkeby solveMinion",
         "deploy-shilpkaar:local": "yarn hardhat --network localhost run ./scripts/deployShilpkaar.ts",
         "solve-shilpkaar:local": "yarn hardhat --network localhost solveShilpkaar",
         "solve-shilpkaar:rinkeby": "yarn hardhat --network rinkeby solveShilpkaar",
