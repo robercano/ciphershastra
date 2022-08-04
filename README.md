@@ -57,12 +57,11 @@ Read the solution [here](./README-undead.md)
 
 # Shilpkaar
 
-Solved by deployer: 0xc892cfd3e75Cf428BDD25576e9a42D515697B2C7
-Solution contract address: 0x16c0dBDD7eEe418C7342a2A81737e6Bb9b3BE4F8
+Read the solution [here](./README-shilpkaar.md)
 
 # ThirtyFive
 
-Solved by deployer: 0xc892cfd3e75Cf428BDD25576e9a42D515697B2C7
+Read the solution [here](./README-thirtyfive.md)
 
 # Maya
 

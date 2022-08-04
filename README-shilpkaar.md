@@ -46,6 +46,8 @@ The second part of this section of the puzzle is to realize that there is more t
 
 With this information we can craft a set of data that will allow us to pass the multiple checks inside the challenge contract.
 
+## First two checks
+
 The values for `gate1Unlocked` and `gate2Unlocked` are set to `true` to pass the first check. Then the second check requires us to fill in the `garbageAddress` variable with a value that meets the folowing expectation:
 
 ```
@@ -56,12 +58,101 @@ The values for `gate1Unlocked` and `gate2Unlocked` are set to `true` to pass the
         );
 ```
 
-Looking at the condition and assuming that the values for `garbageDivisor` and `garbageMultiplier`
+Looking at the condition we can set `garbageAddress` to be:
+
+```
+        garbageAddress = address(uint160(2**153 + garbageNonce + 1));
+```
+
+and pass both tests. Because `garbageNonce` is public we can read it and use it in the formula.
+
+## The prime conundrum and the master key
+
+This part was the most difficult to craft along the `masterKey` value. The next check looks like this:
+
+```
+        require(
+            gateKey3 < (uint256(uint64(-1)) * 49) / 100 &&
+                gateKey4 < (uint256(uint64(-1)) * 51) / 100 &&
+                probablyPrime(gateKey3) &&
+                probablyPrime(gateKey4),
+            "Problem with gateKeys"
+        );
+```
+
+It basically says that `gateKey3` must be less than 49% of the maximum value of `uint64` and `gateKey4` must be less than 51% of the maximum value of `uint64`. Oh, and both must be possibly primes!
+
+Because I will need this keys to add up to a certain value for `masterKey` to be valid, I crafted a value to be added and substracted to `gateKey3` and `gateKey4`. This way by adding up `gateKey3` and `gateKey4` the extra value addition and substraction cancel out, but allows us to bring the values of `gateKey3` and `gateKey4` to the desired range:
+
+```
+uint64 gateKeysCompensation = uint64(2**63 - ((uint256(type(uint64).max) * 49) / 100));
+```
+
+Now we can define the `gateKey3` and `gateKey4` values as:
+
+```
+        uint64 gateKey3 = 2**63 - gateKeysCompensation;
+        uint64 gateKey4 = 2**63 + gateKeysCompensation;
+```
+
+This makes both values to be in range, but they are still not prime. In order to find the prime number that is closest to the desired value, I used this [website](https://www.numberempire.com/primenumbers.php) that calculates the closes prime number (next or previous) to the one given. Passing the values for `gateKey3` and `gatekey4` we can gate their respectives previous prime numbers and adjust the formula to hit the target:
+
+```
+        uint64 gateKey3 = 2**63 - 44 - gateKeysCompensation;
+        uint64 gateKey4 = 2**63 - 92 + gateKeysCompensation;
+```
+
+The `masterKey` is calculated like this:
+
+```
+        uint256 masterKey = uint256(gateKey1) +
+            uint256(gateKey2) +
+            uint256(gateKey3) +
+            uint256(gateKey4) +
+            uint256(gateKey5);
+```
+
+And we need `masterKey` to meet the following check:
+
+```
+        require(
+            masterKey > (2**65 + 2**56) + masterNonce &&
+                masterKey < (2**65 + 2**56 + 2**16) - ((masterDivisor - 1) - masterNonce),
+            "Problem with masterkey"
+        );
+```
+
+If we add up all the values composing the `masterKey` we can see that we are short by `masterNonce` and an extra 139. This is great because we have one free variable available which is `gateKey1`. We can use this variable to add the missing value to `masterKey`. It is a `uint16` but it is enough to hold the needed offset:
+
+```
+        uint16 gateKey1 = 139 + uint16(masterNonce);
+```
+
+## Roulette Start Time
+
+The last value we need to set is the `rouletteStartTime`. This will the time used in the `roulette` function check:
+
+```
+     require(block.timestamp >= timeToRoll[msg.sender], "Problem with timeToRoll");
+```
+
+The easiest is to set it to 0, so we can call `roulette` at any time.
+
+## Final Hack
+
+With all these values now we can craft the values for `name` and `password`:
+
+```
+        bytes32 name = bytes32(abi.encodePacked(rouletteStartTime, gateKey1, gate1Unlocked, garbageAddress));
+        bytes32 password = bytes32(abi.encodePacked(gateKey5, gateKey4, gate2Unlocked, gateKey3, gateKey2));
+```
+
+We can call `unlock` with this values and then `roulette` to win the challenge~
 
 ## Solution
 
-Solution Contract Address: 0x12C3F96c527b9df502344733F197E7092258607A
-Challenge Contract Address: 0xe3Bf6D5379fD80C44156bAa4f3D8e7F507f6bcd1
+Solved by deployer: 0xc892cfd3e75Cf428BDD25576e9a42D515697B2C7
+Solution contract address: 0x16c0dBDD7eEe418C7342a2A81737e6Bb9b3BE4F8
 
 You will need to check the challenge contract internal transactions to see the calls from the solution contract
 
@@ -70,7 +161,7 @@ You will need to check the challenge contract internal transactions to see the c
 To solve this challenge you can use the following command:
 
 ```
-$ yarn solve-minion:rinkeby --minion-address 0xe3Bf6D5379fD80C44156bAa4f3D8e7F507f6bcd1
+$ yarn solve-shilpkaar:rinkeby --shilpkaar-address 0x8b6Df584c5b82F9647a63a66cfD45006ccB777FF
 ```
 
-The deployed attack contract MinionSolution address will be the one registered as being pwned the Minion contract.
+The deployed attack contract ShilpkaarSolution address will be the one registered as being pwned the Shilpkaar contract.
