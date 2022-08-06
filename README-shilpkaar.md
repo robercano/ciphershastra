@@ -154,6 +154,9 @@ We can call `unlock` with this values and then `roulette` to win the challenge~
 Solved by deployer: 0xc892cfd3e75Cf428BDD25576e9a42D515697B2C7
 Solution contract address: 0x16c0dBDD7eEe418C7342a2A81737e6Bb9b3BE4F8
 
+Solution contract: [ShilpkaarSolution](./contracts/solutions/ShilpkaarSolution.sol)
+Solution Script: [solveShilpkaar.ts](./tasks/solveShilpkaar.ts)
+
 You will need to check the challenge contract internal transactions to see the calls from the solution contract
 
 ## Auto-solve

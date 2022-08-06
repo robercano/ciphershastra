@@ -42,6 +42,9 @@ You can find the attacking contract code [here](./contracts/solutions/MinionSolu
 Solution Contract Address: 0x12C3F96c527b9df502344733F197E7092258607A
 Challenge Contract Address: 0xe3Bf6D5379fD80C44156bAa4f3D8e7F507f6bcd1
 
+Solution Contract: [MinionSolution](./contracts/solutions/MinionSolution.sol)
+Solution Script: [solveMinion.ts](./tasks/solveMinion.ts)
+
 You will need to check the challenge contract internal transactions to see the calls from the solution contract
 
 ## Auto-solve

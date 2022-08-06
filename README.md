@@ -65,4 +65,4 @@ Read the solution [here](./README-thirtyfive.md)
 
 # Maya
 
-Solved by deployer: 0xc892cfd3e75Cf428BDD25576e9a42D515697B2C7
+Read the solution [here](./README-maya.md)

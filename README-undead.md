@@ -124,6 +124,9 @@ Network: Rinkeby
 Solution Contract Address: 0xf845763a8d905CFD270aa85dB100d7bfc7bA3806
 UnDeAD map id: 0x2ad8753d9f3276d2501d282f2f5e47524164dd47fc38b231cb1e41edc5be315b
 
+Solution Contract: [UndeadSolutionFactory](./contracts/solutions/UndeadSolutionFactory.sol)
+Solution Script: [solveUndead](./tasks/solveUndead.ts)
+
 ## Auto-solve
 
 To solve this challenge you can use the following command:
