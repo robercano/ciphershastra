@@ -1,4 +1,4 @@
-# Limitless
+# Undead
 
 This puzzle requires a bunch of skills in order to solve it. The only external function we have available is the `deadOrAlive` function. In this function there are several checks that we must meet so we can have our hashed address set as `true` in the `UnDeAD` mapping, which proves that we've passed the challenge.
 
