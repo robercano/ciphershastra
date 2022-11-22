@@ -135,4 +135,4 @@ To solve this challenge you can use the following command:
 $ yarn solve-undead:rinkeby --undead-address 0x8B8AD617e1F95f03c971eB1e199FDf8BBfA32124
 ```
 
-The deployed attack Yul contract ddress will be the one registered as being pwned the Minion contract.
+The deployed attack Yul contract address will be the one registered as being pwned the Minion contract.

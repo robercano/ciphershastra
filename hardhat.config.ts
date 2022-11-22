@@ -15,6 +15,7 @@ import "./tasks/solveUndead";
 import "./tasks/solveShilpkaar";
 import "./tasks/solveThirtyFive";
 import "./tasks/solveMaya";
+import "./tasks/solveGambler";
 
 import { resolve } from "path";
 
@@ -99,7 +100,7 @@ const config: HardhatUserConfig = {
         path: "./abis",
         runOnCompile: true,
         clear: true,
-        flat: true,
+        flat: false,
         only: [],
         spacing: 2,
         pretty: false,

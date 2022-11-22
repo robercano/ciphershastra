@@ -1,3 +1,7 @@
+/**
+ *Submitted for verification at Etherscan.io on 2022-09-03
+ */
+
 pragma solidity ^0.7.0;
 
 library SafeMath {
@@ -6,7 +10,6 @@ library SafeMath {
             return 0;
         }
         uint64 c = a * b;
-        require(c / a == b, "Multiplication Overflow");
         return c;
     }
 
