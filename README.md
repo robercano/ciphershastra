@@ -66,3 +66,7 @@ Read the solution [here](./README-thirtyfive.md)
 # Maya
 
 Read the solution [here](./README-maya.md)
+
+# Gambler
+
+Read the solution [here](./README-gambler.md)
